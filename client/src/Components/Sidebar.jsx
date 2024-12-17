@@ -2,29 +2,37 @@ import React, { useContext, useState } from "react";
 import { FaTachometerAlt, FaEnvelope, FaTasks, FaCalendarAlt, FaUser } from "react-icons/fa";
 import { IoMdLogIn, IoMdLogOut } from "react-icons/io";
 import { ThemeContext } from "../Context/ThemeContext";
+import ChatComponent from "./ChatComponents";
 
 const Sidebar = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(true);
   const { themeMode } = useContext(ThemeContext)
 
   return (
     <div
       onMouseEnter={() => setIsExpanded(true)}
       onMouseLeave={() => setIsExpanded(false)}
-      className={`h-screen flex flex-col justify-between ${themeMode ? 'light' : 'dark'} ${isExpanded ? "w-64" : "w-16"} transition-all duration-500 ease-in-out rounded-l-2xl shadow-xl`}
+      className={`h-screen flex flex-col justify-between ${themeMode ? 'light' : 'dark'} 
+        ${isExpanded ? "w-64" : "w-16"} 
+        transition-all duration-500 ease-in-out rounded-l-2xl shadow-xl`}
     >
-
       <div className="p-2">
         <div className="flex items-center p-2 gap-2 border-b">
           <span className="text-3xl">🚀</span>
-          {isExpanded && <h1 className="text-xl font-bold">TaskVista</h1>}
+          {isExpanded && (
+            <h1 className="text-xl font-bold transition-all duration-300 ease-in-out opacity-100">
+              TaskVista
+            </h1>
+          )}
         </div>
 
         <div className="mt-6 shadow-md">
-          {isExpanded && <h1 className="text-2xl font-bold">Start Your Day & Be Productive👋</h1>}
-
+          {isExpanded && (
+            <h1 className="text-2xl font-bold transition-opacity duration-300 ease-in-out opacity-100">
+              Start Your Day & Be Productive👋
+            </h1>
+          )}
         </div>
-
 
         {/* Sidebar Links */}
         <div className="mt-8 flex flex-col gap-6">
@@ -51,7 +59,13 @@ const Sidebar = () => {
         </div>
       </div>
 
-      {/* Bottom Section */}
+      {/* Chat Component */}
+      {isExpanded && (
+        <div className="transition-opacity duration-500 ease-in-out">
+          <ChatComponent />
+        </div>
+      )}
+
       <div className="p-2 border-t">
         <SidebarLink
           icon={<IoMdLogIn size={24} />}
