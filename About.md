@@ -19,3 +19,13 @@
 - **Responsive UI:** The theme system is fully responsive, adjusting automatically according to the user's preference or system settings.
 
 
+![TaskVista TaskForm && Task UI](./client/src/assets/Tasks_UI.png)
+
+### AddTaskForm
+  - **Task Input Fields:** Created a form to add tasks with fields for Title, Date & Time, Category, Priority, and Status.
+  - **Form Submission:** On form submission, the task data is captured and displayed.
+
+### RecentTask & RecentMeeting UI
+  - **Recent Task**: Displays task details like title, category, priority, and status.
+  - **Recent Meeting**: Shows meeting details, including time, platform (e.g., Discord), and description.
+  - **Timer for Deadlines**: A countdown timer for task deadlines and meeting times is included to keep users updated.
