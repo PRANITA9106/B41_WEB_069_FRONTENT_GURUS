@@ -21,7 +21,7 @@ const Sidebar = () => {
           <span className="text-3xl">🚀</span>
           {isExpanded && (
             <h1 className="text-xl font-bold transition-all duration-300 ease-in-out opacity-100">
-              TaskVista
+              Taskly
             </h1>
           )}
         </div>
