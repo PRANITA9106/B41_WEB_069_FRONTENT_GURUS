@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
-import { FaTachometerAlt, FaEnvelope, FaTasks, FaCalendarAlt, FaUser } from "react-icons/fa";
-import { IoMdLogIn, IoMdLogOut } from "react-icons/io";
+import { useContext, useState } from "react";
+import { FaTachometerAlt, FaEnvelope, FaTasks, FaCalendarAlt } from "react-icons/fa";
+import { IoMdLogIn } from "react-icons/io";
 import { ThemeContext } from "../Context/ThemeContext";
 import ChatComponent from "./ChatComponents";
 
@@ -21,7 +21,7 @@ const Sidebar = () => {
           <span className="text-3xl">🚀</span>
           {isExpanded && (
             <h1 className="text-xl font-bold transition-all duration-300 ease-in-out opacity-100">
-              Taskly
+              TaskVista
             </h1>
           )}
         </div>
