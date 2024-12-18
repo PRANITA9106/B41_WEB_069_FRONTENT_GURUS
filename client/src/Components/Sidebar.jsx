@@ -1,13 +1,6 @@
-import React, { useContext, useState } from "react";
-import { FaTachometerAlt, FaEnvelope, FaTasks, FaCalendarAlt, FaUser } from "react-icons/fa";
-import { IoMdLogIn, IoMdLogOut } from "react-icons/io";
-import { ThemeContext } from "../Context/ThemeContext";
-import ChatComponent from "./ChatComponents";
+import React from 'react'
 
-const Sidebar = () => {
-  const [isExpanded, setIsExpanded] = useState(true);
-  const { themeMode } = useContext(ThemeContext)
-
+export default function Sidebar() {
   return (
     <div
       onMouseEnter={() => setIsExpanded(true)}
@@ -73,18 +66,8 @@ const Sidebar = () => {
           expanded={isExpanded}
         />
       </div>
+    <div>
+      Sidebar
     </div>
-  );
-};
-
-// Sidebar Link Component
-const SidebarLink = ({ icon, label, expanded }) => {
-  return (
-    <div className="flex items-center gap-6 cursor-pointer p-2 hover:bg-gray-700 rounded-md">
-      <div>{icon}</div>
-      {expanded && <span className="text-md">{label}</span>}
-    </div>
-  );
-};
-
-export default Sidebar;
+  )
+}
