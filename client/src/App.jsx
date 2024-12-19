@@ -1,13 +1,30 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import AddTask from './Components/AddTask';
+import { useState,useEffect } from 'react';
+
+// import AddTask from './Components/AddTask';
 import { Navbar } from './Components/Navbar';
 import Sidebar from './Components/Sidebar';
-import Tasks from './Components/Tasks';
+// import Tasks from './Components/Tasks';
 import Login from './Components/Login';
 import { Signup } from './Components/Signup';
+import CalendarComponent from './CalendarComponent';
 
 function App() {
+  const [events, setEvents] = useState([]);
+ 
+  useEffect(() => {
+    // Example events
+    const exampleEvents = [
+      {
+        start: new Date(),
+        end: new Date(new Date().setHours(new Date().getHours() + 1)),
+        title: 'Sample Event',
+      },
+    ];
+    setEvents(exampleEvents);
+  }, []);
+ 
   return (
     <>
       <div className="flex h-screen">
@@ -29,6 +46,14 @@ function App() {
 
         </div>
       </div>
+      <div className="App">
+      <header className="App-header">
+        <h1>React Calendar Integration</h1>
+      </header>
+      <main>
+        <CalendarComponent events={events} />
+      </main>
+    </div>
     </>
   );
 }
