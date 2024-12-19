@@ -1,14 +1,20 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { FaGoogle, FaFacebook, FaGithub } from "react-icons/fa";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { ThemeContext } from "../Context/ThemeContext";
 
-const Signup = () => {
+import facebook from '../assets/facebook.svg'
+import google from '../assets/google.svg'
+import github from '../assets/github.svg'
+
+export const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
+
+  const { themeMode } = useContext(ThemeContext)
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -78,9 +84,9 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <div className="w-full max-w-sm p-8 bg-white rounded-lg shadow-lg">
-        <h2 className="text-2xl font-bold text-center mb-6">Signup</h2>
+    <div className={`${themeMode ? 'light' : 'dark'} flex justify-center items-center h-[90vh] `}>
+      <div className="w-full max-w-sm p-8  rounded-lg shadow-2xl border">
+        <h2 className="text-3xl font-bold text-center mb-6">Signup</h2>
         <form onSubmit={handleSignup} className="space-y-4">
           <div>
             <input
@@ -88,7 +94,7 @@ const Signup = () => {
               placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full p-3 border border-gray-300 rounded-md"
+              className={`${themeMode ? 'light' : 'dark'} w-full p-3 border border-gray-300 rounded-md`}
             />
           </div>
 
@@ -98,7 +104,7 @@ const Signup = () => {
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-3 border border-gray-300"
+              className={`${themeMode ? 'light' : 'dark'} w-full p-3 border border-gray-300 rounded-md`}
             />
           </div>
 
@@ -108,40 +114,49 @@ const Signup = () => {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-3 border border-gray-300"
+              className={`${themeMode ? 'light' : 'dark'} w-full p-3 border border-gray-300 rounded-md`}
             />
           </div>
 
           <button
             type="submit"
-            className="w-full p-3 bg-blue-500 text-white rounded-md"
+            className="flex justify-self-center  rounded-md px-4 py-2 bg-gray-700 hover:bg-gray-600"
             disabled={isSubmitting}
           >
             {isSubmitting ? "Signing up..." : "Signup"}
           </button>
         </form>
 
-        <div className="mt-3 flex space-x-4 ml-10">
+        <div className="mt-3 flex justify-center gap-6">
           <button
             onClick={handleGoogleSignup}
-            className="bg-gray-800 text-white p-2 rounded-full"
+            className="border p-2 rounded-full"
           >
-            <FaGoogle size={50} />
+            <img width={28} src={google} alt='facebook' />
           </button>
 
           <button
             onClick={handleFacebookSignup}
-            className="bg-gray-800 text-white p-2 rounded-full"
+            className="border p-2 rounded-full"
           >
-            <FaFacebook size={50} />
+            <img width={28} src={facebook} alt='facebook' />
           </button>
 
           <button
             onClick={handleGitHubSignup}
-            className="bg-gray-800 text-white p-2 rounded-full"
+            className="border p-2 rounded-full"
           >
-            <FaGithub size={50} />
+            <img width={28} src={github} alt="GitHub" />
           </button>
+        </div>
+
+        <div className="mt-4 text-center">
+          <p className="text-sm">
+            You have an account?{" "}
+            <Link to="/sign-in" className="text-blue-500 hover:text-blue-600">
+              Login
+            </Link>
+          </p>
         </div>
 
         {error && <p className="mt-4 text-red-500 text-center">{error}</p>}
@@ -149,5 +164,3 @@ const Signup = () => {
     </div>
   );
 };
-
-export default Signup;

@@ -1,8 +1,11 @@
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import AddTask from './Components/AddTask';
+import { Navbar } from './Components/Navbar';
 import Sidebar from './Components/Sidebar';
-import Navbar from './Components/Navbar';
 import Tasks from './Components/Tasks';
+import Login from './Components/Login';
+import { Signup } from './Components/Signup';
 
 function App() {
   return (
@@ -15,9 +18,13 @@ function App() {
           <Navbar />
 
           {/* content */}
-          <div className="p-4 flex-1 overflow-auto">
-            <AddTask />
-            <Tasks />
+          <div className="flex-1 overflow-auto">
+            {/*  <AddTask /> */}
+            {/*  <Tasks /> */}
+            <Routes>
+              <Route path='/sign-in' element={<Login />} />
+              <Route path='/sign-up' element={<Signup />} />
+            </Routes>
           </div>
 
         </div>

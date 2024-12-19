@@ -38,7 +38,7 @@ export default function AddTask() {
 
   return (
     <div
-      className={`${themeMode ? "light" : "dark"} flex p-4 border rounded-lg shadow-md`}
+      className={`${themeMode ? "light" : "dark"} flex p-4 border  shadow-md`}
     >
       <form
         onSubmit={onSubmitTask}
