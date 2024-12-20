@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { FaTachometerAlt, FaEnvelope, FaTasks, FaCalendarAlt } from "react-icons/fa";
 import { IoMdLogIn } from "react-icons/io";
-import { Link } from "react-router-dom";  // Import Link from react-router-dom
+import { Link } from "react-router-dom";  
 import { ThemeContext } from "../Context/ThemeContext";
 import ChatComponent from "./ChatComponents";
 import Logo from '../assets/TaskVista.png';
@@ -37,28 +37,28 @@ const Sidebar = () => {
           )}
         </div>
 
-        {/* Sidebar Links */}
+   
         <div className="mt-8 flex flex-col gap-6">
           <SidebarLink
-            to="/dashboard"  // Add the path here
+            to="/dashboard" 
             icon={<FaTachometerAlt size={24} />}
             label="Dashboard"
             expanded={isExpanded}
           />
           <SidebarLink
-            to="/messages"  // Example path for Messages
+            to="/messages"  
             icon={<FaEnvelope size={24} />}
             label="Messages"
             expanded={isExpanded}
           />
           <SidebarLink
-            to="/tasks"  // Example path for My Tasks
+            to="/tasks"  
             icon={<FaTasks size={24} />}
             label="My Tasks"
             expanded={isExpanded}
           />
           <SidebarLink
-            to="/calendar"  // Example path for Calendar
+            to="/calendar"  
             icon={<FaCalendarAlt size={24} />}
             label="Calendar"
             expanded={isExpanded}
@@ -66,7 +66,7 @@ const Sidebar = () => {
         </div>
       </div>
 
-      {/* Chat Component */}
+    
       {isExpanded && (
         <div className="transition-opacity duration-500 ease-in-out">
           <ChatComponent />
@@ -75,7 +75,7 @@ const Sidebar = () => {
 
       <div className="p-2 border-t">
         <SidebarLink
-          to="/login"  // Example path for Login
+          to="/login"  
           icon={<IoMdLogIn size={24} />}
           label="Login"
           expanded={isExpanded}
@@ -85,7 +85,7 @@ const Sidebar = () => {
   );
 };
 
-// Sidebar Link Component
+
 const SidebarLink = ({ to, icon, label, expanded }) => {
   return (
     <Link to={to} className="flex items-center gap-6 cursor-pointer p-2 hover:bg-gray-700 rounded-md">
