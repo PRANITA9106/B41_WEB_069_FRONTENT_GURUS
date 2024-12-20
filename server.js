@@ -7,7 +7,6 @@ const taskRoutes = require('./routes/task.routes');
 const usersRoutes = require('./routes/users.routes');
 const commentRoutes = require('./routes/comment.routes');
 const { authenticateToken } = require('./middleware/auth.middleware');
-const { validateRegistration, validateLogin } = require('./validators/auth.validator');
 dotenv.config();
 const app = express();
 
@@ -38,6 +37,7 @@ app.use('/api/tasks', authenticateToken, taskRoutes);
 app.use('/api/comments', authenticateToken, commentRoutes);
 
 // Error handling middleware
+// this will envoke when none of routes will hit.
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something broke!');
