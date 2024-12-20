@@ -4,6 +4,8 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import { format, parse, startOfWeek, getDay } from "date-fns";
 import enUS from "date-fns/locale/en-US";
 import { ThemeContext } from "../Context/ThemeContext";
+import Reminder from "./Reminders";
+import Reminders from "./Reminders";
 
 const locales = {
   "en-US": enUS,
@@ -33,7 +35,7 @@ const BigCalendar = () => {
   ]);
 
   return (
-    <div className={`${themeMode ? 'light' : 'dark'} px-4 py-2`}>
+    <div className={`${themeMode ? 'light' : 'dark'} flex gap-4  px-4 py-2`}>
       <Calendar
         className={`${themeMode ? 'light' : 'dark'}  w-2/3 px-4 py-2 rounded-lg`}
         localizer={localizer}
@@ -42,6 +44,7 @@ const BigCalendar = () => {
         endAccessor="end"
         style={{ height: 400 }}
       />
+      <Reminders />
     </div>
   );
 };
