@@ -1,39 +1,39 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { auth } from "../firebaseConfig";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-} from "firebase/auth";
+import { createContext, useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 
+// Create the AuthContext
 export const AuthContext = createContext();
 
-export const useAuth = () => useContext(AuthContext);
-
-function AuthRoute({ element, ...rest }) {
-  const { currentUser } = useAuth();
-  return currentUser ? element : <Navigate to="/" />;
-}
-
 export const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(null);
+  // Initialize authentication state based on localStorage or default to false
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    const storedAuth = localStorage.getItem("isAuthenticated");
+    return storedAuth === "true";  // Ensure it's a boolean value
+  });
 
-  const signup = (email, password) => createUserWithEmailAndPassword(auth, email, password);
-  const login = (email, password) => signInWithEmailAndPassword(auth, email, password);
-  const logout = () => signOut(auth);
+  // Authenticate function to toggle the state
+  const authenticate = () => {
+    setIsAuthenticated(true);
+    localStorage.setItem("isAuthenticated", true); // Save authentication state in localStorage
+  };
 
+  // Logout function to set isAuthenticated to false
+  const logout = () => {
+    setIsAuthenticated(false);
+    localStorage.removeItem("isAuthenticated"); // Remove authentication state from localStorage
+  };
+
+  // Optional: useEffect to handle the initial state more clearly
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
-    });
-    return unsubscribe;
-  }, []);
+    // Handle any updates to authentication state or sessions here
+    if (!isAuthenticated) {
+      localStorage.removeItem("isAuthenticated");
+    }
+  }, [isAuthenticated]);
 
   return (
-    <AuthContext.Provider value={{ currentUser, signup, login, logout }}>
-      {children}
+    <AuthContext.Provider value={{ isAuthenticated, authenticate, logout }}>
+      {isAuthenticated ? children : <Navigate to="/sign-in" />}
     </AuthContext.Provider>
   );
 };

@@ -4,8 +4,8 @@ import './index.css'
 import App from './App.jsx'
 import { ThemeProvider } from './Context/ThemeContext.jsx'
 import { BrowserRouter } from 'react-router-dom'
-import { DataProvider } from './Context/DataContext.jsx'
 import { AuthProvider } from './Context/AuthContext.jsx'
+import { DataProvider } from './Context/DataContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

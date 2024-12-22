@@ -7,11 +7,11 @@ import Sidebar from './Components/Sidebar';
 import BigCalendar from './Components/BigCalendar';
 import { Chat } from './Pages/Chat';
 import { useContext } from 'react';
-import Login from './Pages/Login';
+
+import { AuthContext } from './Context/AuthContext';
+import { Login } from './Pages/Login';
 import { Signup } from './Pages/Signup';
 import Tasks from './Pages/Tasks';
-import { AuthContext } from './Context/AuthContext';
-
 function App() {
   const { isAuthenticated } = useContext(AuthContext);
 

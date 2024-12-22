@@ -1,12 +1,11 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ThemeContext } from "../Context/ThemeContext";
-import facebook from '../assets/facebook.svg';
-import google from '../assets/google.svg';
-import github from '../assets/github.svg';
-import { auth } from '../firebaseConfig';
-import { createUserWithEmailAndPassword, updateProfile, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, GithubAuthProvider } from "firebase/auth";
-
+import facebook from "../assets/facebook.svg";
+import google from "../assets/google.svg";
+import github from "../assets/github.svg";
+import { auth } from "../firebase/firebase";
+import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, GithubAuthProvider } from "firebase/auth";
 
 export const Signup = () => {
   const [email, setEmail] = useState("");
@@ -17,22 +16,25 @@ export const Signup = () => {
   const navigate = useNavigate();
   const { themeMode } = useContext(ThemeContext);
 
-  const handleSignup = async (e) => {
-    e.preventDefault();
-
-    if (!email || !password || !username) {
-      setError("Please fill out all fields.");
-      return;
+  const validateInput = () => {
+    if (!username || !email || !password) {
+      return "All fields are required.";
     }
-
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      setError("Please enter a valid email.");
-      return;
+      return "Invalid email format.";
     }
-
     if (password.length < 8) {
-      setError("Password should be at least 8 characters.");
+      return "Password should be at least 8 characters.";
+    }
+    return "";
+  };
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    const validationError = validateInput();
+    if (validationError) {
+      setError(validationError);
       return;
     }
 
@@ -40,117 +42,56 @@ export const Signup = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(
-        "https://curd-movies-default-rtdb.firebaseio.com/signup.json",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email,
-            password,
-            username,
-          }),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Signup failed, please try again.");
-      }
-
-      const data = await response.json();
-      console.log("Signup successful!", data);
-
-
-      setEmail("");
-      setPassword("");
-      setUsername("");
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(userCredential.user, { displayName: username });
+      alert("Signup successful!");
+      navigate("/login");
     } catch (err) {
-      setError("An error occurred. Please check your inputs.");
+      setError("Signup failed. Please try again.");
       console.error(err);
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const handleGoogleSignup = async () => {
-    const provider = new GoogleAuthProvider();
+  const handleThirdPartySignup = async (providerInstance, providerName) => {
     try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-
-      setEmail("");
-      setPassword("");
-      setUsername("");
-
-      alert("Signup with Google successful!");
+      const result = await signInWithPopup(auth, providerInstance);
+      console.log(`${providerName} Signup successful!`, result);
+      alert(`${providerName} Signup successful!`);
       navigate("/login");
     } catch (err) {
-      setError("An error occurred during Google signup.");
+      setError(`${providerName} Signup failed: ${err.message}`);
       console.error(err);
     }
   };
 
-  const handleFacebookSignup = async () => {
-    const provider = new FacebookAuthProvider(); // Initialize Facebook provider
-    try {
-      const result = await signInWithPopup(auth, provider);
-      console.log("Facebook Signup successful!", result);
-      navigate("/login");
-    } catch (error) {
-      setError("Facebook Signup failed: " + error.message);
-      console.error(error);
-    }
-  };
-
-  const handleGitHubSignup = async () => {
-    const provider = new GithubAuthProvider(); // Initialize GitHub provider
-    try {
-      const result = await signInWithPopup(auth, provider);
-      console.log("GitHub Signup successful!", result);
-      navigate("/login");
-    } catch (error) {
-      setError("GitHub Signup failed: " + error.message);
-      console.error(error);
-    }
-  };
-
   return (
-    <div className={`${themeMode ? 'light' : 'dark'} flex justify-center items-center h-[90vh]`}>
+    <div className={`${themeMode ? "light" : "dark"} flex justify-center items-center h-[90vh]`}>
       <div className="w-full max-w-sm p-8 rounded-lg shadow-2xl border">
         <h2 className="text-3xl font-bold text-center mb-6">Signup</h2>
         <form onSubmit={handleSignup} className="space-y-4">
-          <div>
-            <input
-              type="text"
-              placeholder="Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className={`w-full p-3 border ${themeMode ? 'border-gray-300' : 'border-gray-600'} rounded-md`}
-            />
-          </div>
-
-          <div>
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className={`w-full p-3 border ${themeMode ? 'border-gray-300' : 'border-gray-600'} rounded-md`}
-            />
-          </div>
-
-          <div>
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className={`w-full p-3 border ${themeMode ? 'border-gray-300' : 'border-gray-600'} rounded-md`}
-            />
-          </div>
-
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className={`w-full p-3 border ${themeMode ? "border-gray-300" : "border-gray-600"} rounded-md`}
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className={`w-full p-3 border ${themeMode ? "border-gray-300" : "border-gray-600"} rounded-md`}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className={`w-full p-3 border ${themeMode ? "border-gray-300" : "border-gray-600"} rounded-md`}
+          />
           <button
             type="submit"
             className="w-full rounded-md px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white"
@@ -162,21 +103,19 @@ export const Signup = () => {
 
         <div className="mt-4 flex justify-center gap-6">
           <button
-            onClick={handleGoogleSignup}
+            onClick={() => handleThirdPartySignup(new GoogleAuthProvider(), "Google")}
             className="border p-2 rounded-full"
           >
             <img width={28} src={google} alt="Google" />
           </button>
-
           <button
-            onClick={handleFacebookSignup}
+            onClick={() => handleThirdPartySignup(new FacebookAuthProvider(), "Facebook")}
             className="border p-2 rounded-full"
           >
             <img width={28} src={facebook} alt="Facebook" />
           </button>
-
           <button
-            onClick={handleGitHubSignup}
+            onClick={() => handleThirdPartySignup(new GithubAuthProvider(), "GitHub")}
             className="border p-2 rounded-full"
           >
             <img width={28} src={github} alt="GitHub" />

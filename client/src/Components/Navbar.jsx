@@ -3,17 +3,15 @@ import { FaUserCircle, FaSearch, FaBell } from 'react-icons/fa';
 import { ThemeContext } from '../Context/ThemeContext';
 import { MdLightMode, MdDarkMode } from "react-icons/md";
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../Context/AuthContext';
-
+import { AuthContext, } from '../Context/AuthContext'; 
 
 export const Navbar = () => {
   const { themeMode, toggleThemeMode } = useContext(ThemeContext);
-  const { currentUser, logout } = useAuth();
+  const { currentUser, logout } = useAuth(); 
   const [searchQuery, setSearchQuery] = useState('');
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [userPhoto, setUserPhoto] = useState(null);
   const navigate = useNavigate();
-
 
   const handleSearchChange = (e) => setSearchQuery(e.target.value);
 
@@ -22,7 +20,6 @@ export const Navbar = () => {
     console.log("Search Query:", searchQuery);
     setSearchQuery('');
   };
-
 
   const handleLogout = async () => {
     try {
@@ -34,7 +31,6 @@ export const Navbar = () => {
     }
   };
 
-
   const handleProfileClick = () => {
     if (currentUser) {
       navigate('/dashboard');
@@ -42,7 +38,6 @@ export const Navbar = () => {
       navigate('/login');
     }
   };
-
 
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
@@ -55,6 +50,7 @@ export const Navbar = () => {
   return (
     <nav className={`flex justify-between items-center px-6 py-4 transition-all duration-500 ease-in-out rounded-tr-2xl shadow-xl ${themeMode ? 'bg-white' : 'bg-gray-800'}`}>
 
+      {/* Search Bar */}
       <div className={`flex items-center bg-gray-200 dark:bg-gray-700 rounded-full p-3 space-x-4 w-[500px] sm:w-[350px]`}>
         <FaSearch className="text-gray-500 dark:text-gray-300" />
         <form onSubmit={handleSearchSubmit} className="w-full">
@@ -68,16 +64,13 @@ export const Navbar = () => {
         </form>
       </div>
 
+      {/* Right Section */}
       <div className="flex items-center space-x-6">
-
-
-
-
         <div className="relative">
           <FaBell className="text-2xl cursor-pointer" />
         </div>
 
-
+        {/* Theme Toggle */}
         <button
           onClick={toggleThemeMode}
           className="focus:outline-none"
@@ -90,13 +83,11 @@ export const Navbar = () => {
           )}
         </button>
 
-
+        {/* User Section */}
         <div className="relative flex items-center space-x-2 ml-auto">
           {currentUser ? (
             <>
-
               <span className="text-sm text-gray-600 dark:text-gray-200">Welcome, {currentUser.displayName}</span>
-
               <div className="relative">
                 <button onClick={toggleDropdown} className="p-2">
                   {userPhoto ? (
@@ -130,7 +121,6 @@ export const Navbar = () => {
               </div>
             </>
           ) : (
-
             <Link
               to="/login"
               className="flex items-center space-x-2 text-gray-600 hover:text-gray-900"
