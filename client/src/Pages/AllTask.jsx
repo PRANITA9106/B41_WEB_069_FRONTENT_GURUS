@@ -1,9 +1,9 @@
-import React from 'react'
+export const AllTask=()=>{
+    return (
+        <div>
+            All tasks
+        </div>
+    )
 
-function AllTask() {
-  return (
-    <div>AllTask</div>
-  )
 }
 
-export default AllTask

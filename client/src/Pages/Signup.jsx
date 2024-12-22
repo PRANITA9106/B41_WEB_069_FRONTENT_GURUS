@@ -1,11 +1,10 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ThemeContext } from "../Context/ThemeContext";
-import facebook from '../assets/facebook.svg';
-import google from '../assets/google.svg';
-import github from '../assets/github.svg';
-import { auth } from './firebaseConfig';
-import { createUserWithEmailAndPassword, updateProfile, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+
+import facebook from '../assets/facebook.svg'
+import google from '../assets/google.svg'
+import github from '../assets/github.svg'
 
 export const Signup = () => {
   const [email, setEmail] = useState("");
@@ -14,19 +13,14 @@ export const Signup = () => {
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
-  const { themeMode } = useContext(ThemeContext);
+
+  const { themeMode } = useContext(ThemeContext)
 
   const handleSignup = async (e) => {
     e.preventDefault();
 
     if (!email || !password || !username) {
       setError("Please fill out all fields.");
-      return;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setError("Please enter a valid email.");
       return;
     }
 
@@ -74,50 +68,24 @@ export const Signup = () => {
     }
   };
 
-  const handleGoogleSignup = async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-
-
-      setEmail("");
-      setPassword("");
-      setUsername("");
-
-      alert("Signup with Google successful!");
-      navigate("/login");
-    } catch (err) {
-      setError("An error occurred during Google signup.");
-      console.error(err);
-    }
+  const handleGoogleSignup = () => {
+    console.log("Signup with Google successful!");
+    navigate("/login");
   };
 
-  const handleFacebookSignup = async () => {
-    try {
-      const result = await auth.signInWithPopup(facebookProvider);
-      console.log("Facebook Signup successful!", result);
-      navigate("/login");
-    } catch (error) {
-      setError("Facebook Signup failed: " + error.message);
-      console.error(error);
-    }
+  const handleFacebookSignup = () => {
+    console.log("Signup with Facebook successful!");
+    navigate("/login");
   };
 
-  const handleGitHubSignup = async () => {
-    try {
-      const result = await auth.signInWithPopup(githubProvider);
-      console.log("GitHub Signup successful!", result);
-      navigate("/login");
-    } catch (error) {
-      setError("GitHub Signup failed: " + error.message);
-      console.error(error);
-    }
+  const handleGitHubSignup = () => {
+    console.log("Signup with GitHub successful!");
+    navigate("/login");
   };
 
   return (
-    <div className={`${themeMode ? 'light' : 'dark'} flex justify-center items-center h-[90vh]`}>
-      <div className="w-full max-w-sm p-8 rounded-lg shadow-2xl border">
+    <div className={`${themeMode ? 'light' : 'dark'} flex justify-center items-center h-[90vh] `}>
+      <div className="w-full max-w-sm p-8  rounded-lg shadow-2xl border">
         <h2 className="text-3xl font-bold text-center mb-6">Signup</h2>
         <form onSubmit={handleSignup} className="space-y-4">
           <div>
@@ -126,7 +94,7 @@ export const Signup = () => {
               placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className={`w-full p-3 border ${themeMode ? 'border-gray-300' : 'border-gray-600'} rounded-md`}
+              className={`${themeMode ? 'light' : 'dark'} w-full p-3 border border-gray-300 rounded-md`}
             />
           </div>
 
@@ -136,7 +104,7 @@ export const Signup = () => {
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className={`w-full p-3 border ${themeMode ? 'border-gray-300' : 'border-gray-600'} rounded-md`}
+              className={`${themeMode ? 'light' : 'dark'} w-full p-3 border border-gray-300 rounded-md`}
             />
           </div>
 
@@ -146,32 +114,32 @@ export const Signup = () => {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className={`w-full p-3 border ${themeMode ? 'border-gray-300' : 'border-gray-600'} rounded-md`}
+              className={`${themeMode ? 'light' : 'dark'} w-full p-3 border border-gray-300 rounded-md`}
             />
           </div>
 
           <button
             type="submit"
-            className="w-full rounded-md px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white"
+            className="flex justify-self-center  rounded-md px-4 py-2 bg-gray-700 hover:bg-gray-600"
             disabled={isSubmitting}
           >
             {isSubmitting ? "Signing up..." : "Signup"}
           </button>
         </form>
 
-        <div className="mt-4 flex justify-center gap-6">
+        <div className="mt-3 flex justify-center gap-6">
           <button
             onClick={handleGoogleSignup}
             className="border p-2 rounded-full"
           >
-            <img width={28} src={google} alt='Google' />
+            <img width={28} src={google} alt='facebook' />
           </button>
 
           <button
             onClick={handleFacebookSignup}
             className="border p-2 rounded-full"
           >
-            <img width={28} src={facebook} alt='Facebook' />
+            <img width={28} src={facebook} alt='facebook' />
           </button>
 
           <button
@@ -184,8 +152,8 @@ export const Signup = () => {
 
         <div className="mt-4 text-center">
           <p className="text-sm">
-            Already have an account?{" "}
-            <Link to="/login" className="text-blue-500 hover:text-blue-600">
+            You have an account?{" "}
+            <Link to="/sign-in" className="text-blue-500 hover:text-blue-600">
               Login
             </Link>
           </p>
