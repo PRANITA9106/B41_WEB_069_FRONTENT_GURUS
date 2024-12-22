@@ -8,7 +8,7 @@ import Sidebar from './Components/Sidebar';
 // import Tasks from './Components/Tasks';
 import Login from './Components/Login';
 import { Signup } from './Components/Signup';
-import CalendarComponent from './CalendarComponent';
+import CalendarComponent from './Components/CalendarComponent';
 
 function App() {
   const [events, setEvents] = useState([]);
@@ -33,7 +33,7 @@ function App() {
         <div className="flex-1 flex flex-col">
           {/* Navbar */}
           <Navbar />
-
+          {/* <CalendarComponent  /> */}
           {/* content */}
           <div className="flex-1 overflow-auto">
             {/*  <AddTask /> */}
@@ -41,6 +41,7 @@ function App() {
             <Routes>
               <Route path='/sign-in' element={<Login />} />
               <Route path='/sign-up' element={<Signup />} />
+              <Route path="/CalendarComponent" element={<CalendarComponent />} />
             </Routes>
           </div>
 
@@ -51,7 +52,7 @@ function App() {
         <h1>React Calendar Integration</h1>
       </header>
       <main>
-        <CalendarComponent events={events} />
+       
       </main>
     </div>
     </>
