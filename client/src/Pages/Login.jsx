@@ -11,11 +11,7 @@ const Login = () => {
   const { themeMode } = useContext(ThemeContext)
 
   const handleLogin = async (e) => {
-
-
     e.preventDefault();
-
-
     setError("");
 
     if (!email || !password) {

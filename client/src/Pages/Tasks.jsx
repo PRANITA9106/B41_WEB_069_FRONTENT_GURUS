@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import RecentTask from './RecentTask';
-import RecentMeeting from './RecentMeeting';
+import RecentTask from '../Components/RecentTask';
+import RecentMeeting from '../Components/RecentMeeting';
 import { ThemeContext } from '../Context/ThemeContext';
-import Calendar from './Calendar';
+import Calendar from '../Components/Calendar';
 
 export default function Tasks() {
   const { themeMode } = useContext(ThemeContext)

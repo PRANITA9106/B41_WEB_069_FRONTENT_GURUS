@@ -1,0 +1,51 @@
+[
+  {
+    "title": "Complete project documentation",
+    "deadline": "2024-12-25T17:00",
+    "category": "task",
+    "priority": "high",
+    "status": "todo"
+  },
+  {
+    "title": "Team meeting for sprint planning",
+    "deadline": "2024-12-23T10:00",
+    "category": "meeting",
+    "priority": "medium",
+    "status": "in-progress"
+  },
+  {
+    "title": "Send invoice reminders to clients",
+    "deadline": "2024-12-22T15:00",
+    "category": "reminder",
+    "priority": "high",
+    "status": "todo"
+  },
+  {
+    "title": "Update website content",
+    "deadline": "2024-12-26T12:00",
+    "category": "task",
+    "priority": "low",
+    "status": "completed"
+  },
+  {
+    "title": "Quarterly performance review meeting",
+    "deadline": "2024-12-27T11:00",
+    "category": "meeting",
+    "priority": "high",
+    "status": "todo"
+  },
+  {
+    "title": "Prepare presentation for client demo",
+    "deadline": "2024-12-24T14:00",
+    "category": "task",
+    "priority": "medium",
+    "status": "in-progress"
+  },
+  {
+    "title": "Set up reminders for project deadlines",
+    "deadline": "2024-12-28T09:00",
+    "category": "reminder",
+    "priority": "low",
+    "status": "todo"
+  }
+]

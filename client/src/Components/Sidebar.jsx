@@ -2,8 +2,10 @@ import { useContext, useState } from "react";
 import { FaTachometerAlt, FaEnvelope, FaTasks, FaCalendarAlt } from "react-icons/fa";
 import { IoMdLogIn } from "react-icons/io";
 import { ThemeContext } from "../Context/ThemeContext";
-import ChatComponent from "./ChatComponents";
 import Logo from '../assets/TaskVista.png'
+import { Link } from "react-router-dom";
+import { FaInfoCircle } from "react-icons/fa";
+
 
 const Sidebar = () => {
   const [isExpanded, setIsExpanded] = useState(true);
@@ -14,7 +16,7 @@ const Sidebar = () => {
       onMouseEnter={() => setIsExpanded(true)}
       onMouseLeave={() => setIsExpanded(false)}
       className={`h-screen flex flex-col justify-between ${themeMode ? 'light' : 'dark'} 
-        ${isExpanded ? "w-64" : "w-16"} 
+        ${isExpanded ? "w-72" : "w-16"} 
         transition-all duration-500 ease-in-out rounded-l-2xl shadow-xl`}
     >
       <div className="p-2">
@@ -38,34 +40,38 @@ const Sidebar = () => {
         {/* Sidebar Links */}
         <div className="mt-8 flex flex-col gap-6">
           <SidebarLink
+            to='/'
             icon={<FaTachometerAlt size={24} />}
             label="Dashboard"
             expanded={isExpanded}
           />
           <SidebarLink
+            to='/messages'
             icon={<FaEnvelope size={24} />}
             label="Messages"
             expanded={isExpanded}
           />
           <SidebarLink
+            to='/all-tasks'
             icon={<FaTasks size={24} />}
             label="My Tasks"
             expanded={isExpanded}
           />
           <SidebarLink
+            to='/calendar'
             icon={<FaCalendarAlt size={24} />}
             label="Calendar"
             expanded={isExpanded}
           />
+
+          <SidebarLink
+            to='/about'
+            icon={<FaInfoCircle size={24} />}
+            label="Aboout"
+            expanded={isExpanded}
+          />
         </div>
       </div>
-
-      {/* Chat Component */}
-      {isExpanded && (
-        <div className="transition-opacity duration-500 ease-in-out">
-          <ChatComponent />
-        </div>
-      )}
 
       <div className="p-2 border-t">
         <SidebarLink
@@ -79,12 +85,18 @@ const Sidebar = () => {
 };
 
 // Sidebar Link Component
-const SidebarLink = ({ icon, label, expanded }) => {
+const SidebarLink = ({ icon, label, expanded, to = "/" }) => {
+  const isActive = window.location.pathname === to;
   return (
-    <div className="flex items-center gap-6 cursor-pointer p-2 hover:bg-gray-700 rounded-md">
-      <div>{icon}</div>
-      {expanded && <span className="text-md">{label}</span>}
-    </div>
+    <Link to={to}>
+      <div
+        className={`flex items-center gap-6 cursor-pointer p-2 rounded-md ${isActive ? "bg-gray-700 text-white" : "hover:bg-gray-700"
+          }`}
+      >
+        <div>{icon}</div>
+        {expanded && <span className="text-md">{label}</span>}
+      </div>
+    </Link>
   );
 };
 
