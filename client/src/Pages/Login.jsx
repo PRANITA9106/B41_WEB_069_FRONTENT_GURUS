@@ -1,26 +1,3 @@
-<<<<<<< HEAD
-import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { loginUser } from "../utils.js/auth";
-
-export const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setError("");
-
-    try {
-      await loginUser(email, password);
-      navigate("/");
-    } catch (err) {
-      setError(err.message);
-=======
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ThemeContext } from "../Context/ThemeContext";
@@ -74,7 +51,6 @@ const Login = () => {
     } catch (err) {
       setError("An error occurred. Please try again.");
       console.error(err);
->>>>>>> Frontend_Gurus/Utkarsh
     } finally {
       setIsSubmitting(false);
     }
