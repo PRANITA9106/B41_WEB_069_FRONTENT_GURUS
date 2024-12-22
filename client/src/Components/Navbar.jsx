@@ -3,11 +3,11 @@ import { FaUserCircle, FaSearch, FaBell } from 'react-icons/fa';
 import { ThemeContext } from '../Context/ThemeContext';
 import { MdLightMode, MdDarkMode } from "react-icons/md";
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext, } from '../Context/AuthContext'; 
+import { AuthContext, } from '../Context/AuthContext';
 
 export const Navbar = () => {
   const { themeMode, toggleThemeMode } = useContext(ThemeContext);
-  const { currentUser, logout } = useAuth(); 
+  const { currentUser, logout } = useAuth();
   const [searchQuery, setSearchQuery] = useState('');
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [userPhoto, setUserPhoto] = useState(null);
@@ -83,52 +83,36 @@ export const Navbar = () => {
           )}
         </button>
 
-        {/* User Section */}
-        <div className="relative flex items-center space-x-2 ml-auto">
+        <div className="relative flex items-center space-x-2 border px-2 py-1 rounded-lg">
           {currentUser ? (
             <>
-              <span className="text-sm text-gray-600 dark:text-gray-200">Welcome, {currentUser.displayName}</span>
-              <div className="relative">
-                <button onClick={toggleDropdown} className="p-2">
-                  {userPhoto ? (
-                    <img
-                      src={userPhoto}
-                      alt="User Avatar"
-                      className="w-8 h-8 rounded-full"
-                    />
-                  ) : (
-                    <FaUserCircle size={40} />
-                  )}
-                </button>
-                {dropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-md p-2 z-10">
-                    <ul>
-                      <li>
-                        <Link to="/userprofile" className="block px-4 py-2 hover:bg-gray-100">
-                          My Profile
-                        </Link>
-                      </li>
-                      <li className="block px-4 py-2 hover:bg-gray-100">Settings</li>
-                      <li
-                        className="block px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                        onClick={handleLogout}
-                      >
-                        Log Out
-                      </li>
-                    </ul>
-                  </div>
-                )}
+              <img
+                src={currentUser.photoURL}
+                alt="User Avatar"
+                className="w-10 h-10 rounded-full cursor-pointer"
+              />
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex-col">
+                  <p className="text-md font-bold cursor-pointer">{currentUser.displayName}</p>
+                  <p className="text-sm">{currentUser.profession}</p>
+                </div>
+                <div>
+                  <FaChevronDown />
+                </div>
               </div>
             </>
           ) : (
             <Link
-              to="/login"
+              to="/sign-in"
               className="flex items-center space-x-2 text-gray-600 hover:text-gray-900"
             >
               <FaUserCircle className="text-5xl cursor-pointer" />
+              <span className="text-md font-semibold">Sign In</span>
             </Link>
           )}
         </div>
+
+
       </div>
     </nav>
   );
