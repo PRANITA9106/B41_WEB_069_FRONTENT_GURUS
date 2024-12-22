@@ -83,6 +83,7 @@ export const Navbar = () => {
           )}
         </button>
 
+<<<<<<< HEAD
         {/* User Section */}
         <div className="relative flex items-center space-x-2 ml-auto">
           {currentUser ? (
@@ -129,6 +130,27 @@ export const Navbar = () => {
             </Link>
           )}
         </div>
+=======
+        <Link to='/sign-in' className="relative flex items-center space-x-2 border px-2 py-1 rounded-lg">
+
+          <img
+            src={currentUser.photoURL}
+            alt="User Avatar"
+            className="w-10 h-10 rounded-full cursor-pointer"
+          />
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex-col">
+              <p className="text-md font-bold cursor-pointer">{currentUser.displayName}</p>
+              <p className="text-sm">{currentUser.profession}</p>
+            </div>
+            <div>
+              <FaChevronDown />
+            </div>
+          </div>
+        </Link>
+
+
+>>>>>>> Frontend_Gurus/Utkarsh
       </div>
     </nav>
   );

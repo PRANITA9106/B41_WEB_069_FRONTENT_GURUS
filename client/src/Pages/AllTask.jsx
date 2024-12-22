@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 export const AllTask = () => {
   return (
     <div>
@@ -6,3 +7,14 @@ export const AllTask = () => {
   )
 
 }
+=======
+export const AllTask=()=>{
+    return (
+        <div>
+            All tasks
+        </div>
+    )
+
+}
+
+>>>>>>> Frontend_Gurus/Utkarsh

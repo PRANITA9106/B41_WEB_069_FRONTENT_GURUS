@@ -3,6 +3,17 @@ import './App.css';
 import AddTask from './Components/AddTask';
 import { Navbar } from './Components/Navbar';
 import Sidebar from './Components/Sidebar';
+<<<<<<< HEAD
+=======
+
+import BigCalendar from './Components/BigCalendar';
+import { Chat } from './Pages/Chat';
+import { useContext } from 'react';
+import { AuthContext } from './Context/AuthContext';
+import Login from './Pages/Login';
+import { Signup } from './Pages/Signup';
+import Tasks from './Pages/Tasks';
+>>>>>>> Frontend_Gurus/Utkarsh
 
 import BigCalendar from './Components/BigCalendar';
 import { Chat } from './Pages/Chat';

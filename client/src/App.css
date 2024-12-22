@@ -10,6 +10,7 @@
   border: 1px solid rgb(17 24 39);
 }
 
+<<<<<<< HEAD
 
  .highlight {
    background-color: #ffeb3b;
@@ -49,3 +50,43 @@
    color: white;
    border-radius: 50%;
  }
+=======
+.highlight {
+  background-color: #ffeb3b;
+  border-radius: 50%;
+}
+.react-calendar {
+  max-width: 100%;
+  margin: auto;
+  font-size: 0.9rem;
+}
+
+.light .react-calendar {
+  background-color: white;
+  color: rgb(17 24 39);
+}
+
+.dark .react-calendar {
+  background-color: rgb(17 24 39);
+  color: white;
+}
+
+.react-calendar button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.react-calendar button:enabled:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 2px solid white;
+  border-radius: 50%;
+}
+
+.react-calendar__tile--active {
+  background: #6c63ff;
+  color: white;
+  border-radius: 50%;
+}
+
+>>>>>>> Frontend_Gurus/Utkarsh
