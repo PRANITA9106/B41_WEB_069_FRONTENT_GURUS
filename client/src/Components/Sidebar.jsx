@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { FaTachometerAlt, FaEnvelope, FaTasks, FaCalendarAlt } from "react-icons/fa";
 import { IoMdLogIn } from "react-icons/io";
+import { Link } from "react-router-dom";  // Import Link from react-router-dom
 import { ThemeContext } from "../Context/ThemeContext";
 import Logo from '../assets/TaskVista.png'
 import { Link } from "react-router-dom";
@@ -9,7 +10,7 @@ import { FaInfoCircle } from "react-icons/fa";
 
 const Sidebar = () => {
   const [isExpanded, setIsExpanded] = useState(true);
-  const { themeMode } = useContext(ThemeContext)
+  const { themeMode } = useContext(ThemeContext);
 
   return (
     <div
@@ -21,9 +22,9 @@ const Sidebar = () => {
     >
       <div className="p-2">
         <div className="flex items-center p-2 gap-2 border-b">
-          <span> <img className="w-14" src={Logo} /></span>
+          <span> <img className="w-14" src={Logo} alt="Logo" /></span>
           {isExpanded && (
-            <h1 className="text-2xl font-bold transition-all duration-300 ease-in-out opacity-100 flex gap-2">
+            <h1 className="text-2xl font-bold transition-all duration-300 ease-in-out opacity-100 flex gap-2 cursor-pointer">
               TaskVista <p className="w-3 h-3 mt-4 rounded-full bg-[#0bd6e5] animate-bounce"></p>
             </h1>
           )}
@@ -75,6 +76,7 @@ const Sidebar = () => {
 
       <div className="p-2 border-t">
         <SidebarLink
+          to="/login"  // Example path for Login
           icon={<IoMdLogIn size={24} />}
           label="Login"
           expanded={isExpanded}

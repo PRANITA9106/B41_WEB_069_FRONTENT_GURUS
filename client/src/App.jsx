@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import AddTask from './Components/AddTask';
-import { Navbar } from './Components/Navbar';
+import  {Navbar}  from './Components/Navbar';
 import Sidebar from './Components/Sidebar';
 
 import BigCalendar from './Components/BigCalendar';
@@ -17,6 +17,7 @@ function App() {
 
   return (
     <>
+    <AuthProvider>
       <div className="flex h-screen">
         {/* Sidebar */}
         {isAuthenticated && <Sidebar />}
@@ -60,6 +61,8 @@ function App() {
           </div>
         </div>
       </div>
+
+      </AuthProvider>
     </>
   );
 }
