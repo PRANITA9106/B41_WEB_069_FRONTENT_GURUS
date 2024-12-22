@@ -155,12 +155,12 @@ export const Signup = () => {
             You have an account?{" "}
             <Link to="/sign-in" className="text-blue-500 hover:text-blue-600">
               Login
-            </Link >
-          </p >
-        </div >
+            </Link>
+          </p>
+        </div>
 
         {error && <p className="mt-4 text-red-500 text-center">{error}</p>}
-      </div >
-    </div >
+      </div>
+    </div>
   );
 };

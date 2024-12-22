@@ -57,28 +57,17 @@ const Login = () => {
   };
 
   return (
-<<<<<<< HEAD
-    <div className={`${themeMode ? "light" : "dark"} flex justify-center items-center  h-[90vh]`}>
-      <div className="w-full max-w-sm p-8 rounded-lg shadow-2xl border">
-        <h2 className="text-3xl font-bold text-center mb-6">Login</h2>
-        <form onSubmit={handleLogin} className="space-y-4">
-=======
     <div className={`${themeMode ? 'light' : 'dark'} flex justify-center items-center  h-[90vh] `}>
       <div className="w-full max-w-sm p-8  rounded-lg shadow-2xl border">
         <h2 className="text-3xl font-bold text-center mb-6 ">Login</h2>
         <form onSubmit={handleLogin} className="space-y-4 ">
->>>>>>> Frontend_Gurus/Utkarsh
           <div>
             <input
               type="email"
               placeholder="abc@gmail.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-<<<<<<< HEAD
-              className={`${themeMode ? "light" : "dark"} w-full p-3 border border-gray-300 rounded-md`}
-=======
               className={`${themeMode ? 'light' : 'dark'} w-full p-3 border border-gray-300 rounded-md`}
->>>>>>> Frontend_Gurus/Utkarsh
               required
             />
           </div>
@@ -88,29 +77,18 @@ const Login = () => {
               placeholder="cdi#1w3ocn0"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-<<<<<<< HEAD
-              className={`${themeMode ? "light" : "dark"} w-full p-3 border border-gray-300 rounded-md`}
-=======
               className={`${themeMode ? 'light' : 'dark'} w-full p-3 border border-gray-300 rounded-md`}
->>>>>>> Frontend_Gurus/Utkarsh
               required
             />
           </div>
           <button
             type="submit"
-<<<<<<< HEAD
-            className="flex justify-self-center rounded-md px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white"
-=======
             className=" flex justify-self-center  rounded-md px-4 py-2 bg-gray-700 hover:bg-gray-600"
->>>>>>> Frontend_Gurus/Utkarsh
             disabled={isSubmitting}
           >
             {isSubmitting ? "Logging in..." : "Login"}
           </button>
-<<<<<<< HEAD
-=======
 
->>>>>>> Frontend_Gurus/Utkarsh
         </form>
 
         {error && <p className="mt-4 text-red-500 text-center">{error}</p>}
@@ -127,8 +105,5 @@ const Login = () => {
     </div>
   );
 };
-<<<<<<< HEAD
-=======
 
 export default Login;
->>>>>>> Frontend_Gurus/Utkarsh
