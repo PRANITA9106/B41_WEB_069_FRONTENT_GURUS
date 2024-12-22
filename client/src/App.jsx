@@ -3,9 +3,14 @@ import './App.css';
 import AddTask from './Components/AddTask';
 import { Navbar } from './Components/Navbar';
 import Sidebar from './Components/Sidebar';
-import Tasks from './Components/Tasks';
-import Login from './Components/Login';
-import { Signup } from './Components/Signup';
+
+import BigCalendar from './Components/BigCalendar';
+import { Chat } from './Pages/Chat';
+import { useContext } from 'react';
+import { AuthContext } from './Context/AuthContext';
+import Login from './Pages/Login';
+import { Signup } from './Pages/Signup';
+import Tasks from './Pages/Tasks';
 
 function App() {
   const { isAuthenticated } = useContext(AuthContext);
@@ -33,7 +38,11 @@ function App() {
                   isAuthenticated ? (
                     <>
                       <AddTask />
+<<<<<<< HEAD
                       <AllTask />
+=======
+                      <Tasks />
+>>>>>>> ea92656e218ea3ab15f8a8f9757c82ca26c96348
                       <BigCalendar />
                     </>
                   ) : (

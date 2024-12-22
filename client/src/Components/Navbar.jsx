@@ -3,7 +3,7 @@ import { FaUserCircle, FaSearch, FaBell } from 'react-icons/fa';
 import { ThemeContext } from '../Context/ThemeContext';
 import { MdLightMode, MdDarkMode } from "react-icons/md";
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext, } from '../Context/AuthContext';
+import { AuthContext, } from '../Contextw/AuthContext';
 
 export const Navbar = () => {
   const { themeMode, toggleThemeMode } = useContext(ThemeContext);
@@ -83,34 +83,23 @@ export const Navbar = () => {
           )}
         </button>
 
-        <div className="relative flex items-center space-x-2 border px-2 py-1 rounded-lg">
-          {currentUser ? (
-            <>
-              <img
-                src={currentUser.photoURL}
-                alt="User Avatar"
-                className="w-10 h-10 rounded-full cursor-pointer"
-              />
-              <div className="flex items-center justify-between gap-4">
-                <div className="flex-col">
-                  <p className="text-md font-bold cursor-pointer">{currentUser.displayName}</p>
-                  <p className="text-sm">{currentUser.profession}</p>
-                </div>
-                <div>
-                  <FaChevronDown />
-                </div>
-              </div>
-            </>
-          ) : (
-            <Link
-              to="/sign-in"
-              className="flex items-center space-x-2 text-gray-600 hover:text-gray-900"
-            >
-              <FaUserCircle className="text-5xl cursor-pointer" />
-              <span className="text-md font-semibold">Sign In</span>
-            </Link>
-          )}
-        </div>
+        <Link to='/sign-in' className="relative flex items-center space-x-2 border px-2 py-1 rounded-lg">
+
+          <img
+            src={currentUser.photoURL}
+            alt="User Avatar"
+            className="w-10 h-10 rounded-full cursor-pointer"
+          />
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex-col">
+              <p className="text-md font-bold cursor-pointer">{currentUser.displayName}</p>
+              <p className="text-sm">{currentUser.profession}</p>
+            </div>
+            <div>
+              <FaChevronDown />
+            </div>
+          </div>
+        </Link>
 
 
       </div>
