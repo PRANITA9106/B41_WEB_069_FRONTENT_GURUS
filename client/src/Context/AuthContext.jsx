@@ -1,22 +1,21 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { auth } from "./firebaseConfig";
+import { auth } from "../firebaseConfig";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
+import { Navigate } from "react-router-dom";
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
 
-
 function AuthRoute({ element, ...rest }) {
-    const isAuthenticated = useContext(AuthContext);
-  
-    return isAuthenticated ? element : <Redirect to="/login" />;
-  }
+  const { currentUser } = useAuth();
+  return currentUser ? element : <Navigate to="/" />;
+}
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -29,7 +28,7 @@ export const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
     });
-    return unsubscribe; 
+    return unsubscribe;
   }, []);
 
   return (
@@ -38,5 +37,3 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
-
-

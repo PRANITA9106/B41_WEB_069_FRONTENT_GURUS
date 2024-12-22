@@ -4,8 +4,9 @@ import { ThemeContext } from "../Context/ThemeContext";
 import facebook from '../assets/facebook.svg';
 import google from '../assets/google.svg';
 import github from '../assets/github.svg';
-import { auth,   } from './firebaseConfig';
-import { createUserWithEmailAndPassword, updateProfile, signInWithPopup, GoogleAuthProvider } from "firebase/auth"; 
+import { auth } from '../firebaseConfig';
+import { createUserWithEmailAndPassword, updateProfile, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, GithubAuthProvider } from "firebase/auth";
+
 
 export const Signup = () => {
   const [email, setEmail] = useState("");
@@ -61,7 +62,6 @@ export const Signup = () => {
       const data = await response.json();
       console.log("Signup successful!", data);
 
-      navigate("/login");
 
       setEmail("");
       setPassword("");
@@ -80,7 +80,6 @@ export const Signup = () => {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
 
-  
       setEmail("");
       setPassword("");
       setUsername("");
@@ -94,8 +93,9 @@ export const Signup = () => {
   };
 
   const handleFacebookSignup = async () => {
+    const provider = new FacebookAuthProvider(); // Initialize Facebook provider
     try {
-      const result = await auth.signInWithPopup(facebookProvider);
+      const result = await signInWithPopup(auth, provider);
       console.log("Facebook Signup successful!", result);
       navigate("/login");
     } catch (error) {
@@ -105,8 +105,9 @@ export const Signup = () => {
   };
 
   const handleGitHubSignup = async () => {
+    const provider = new GithubAuthProvider(); // Initialize GitHub provider
     try {
-      const result = await auth.signInWithPopup(githubProvider);
+      const result = await signInWithPopup(auth, provider);
       console.log("GitHub Signup successful!", result);
       navigate("/login");
     } catch (error) {
@@ -164,14 +165,14 @@ export const Signup = () => {
             onClick={handleGoogleSignup}
             className="border p-2 rounded-full"
           >
-            <img width={28} src={google} alt='Google' />
+            <img width={28} src={google} alt="Google" />
           </button>
 
           <button
             onClick={handleFacebookSignup}
             className="border p-2 rounded-full"
           >
-            <img width={28} src={facebook} alt='Facebook' />
+            <img width={28} src={facebook} alt="Facebook" />
           </button>
 
           <button
