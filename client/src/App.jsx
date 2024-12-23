@@ -11,6 +11,8 @@ import { AuthContext } from './Context/AuthContext';
 import Login from './Pages/Login';
 import { Signup } from './Pages/Signup';
 import Tasks from './Pages/Tasks';
+import { Footer } from './Components/Footer';
+import { TaskBoard } from './Pages/TaskBoard';
 
 function App() {
   const { isAuthenticated } = useContext(AuthContext);
@@ -56,8 +58,20 @@ function App() {
                   )
                 }
               />
+              <Route
+                path="/task-board"
+                element={
+                  isAuthenticated ? (
+                    <TaskBoard />
+                  ) : (
+                    <Navigate to="/sign-in" />
+                  )
+                }
+              />
+
             </Routes>
           </div>
+          <Footer />
         </div>
       </div>
     </>
